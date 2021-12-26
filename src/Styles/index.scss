@@ -1,0 +1,166 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
+$radius:10px;
+
+:root{
+  --main-bg:#D2CEC8;
+  --header-bg:#8A8E85;
+  --text-prim:#252525;
+  --text-sec:#5f5e5e;
+  --btn-text:#ffffff;
+  --card-bg:#C98774;
+  --btn-bg:#D4931D;
+}
+*{
+  box-sizing: border-box;
+  margin:0;
+}
+%link{
+  text-decoration: none;
+  color: var(--btn-text);
+  background-color: var(--btn-bg);
+}
+body{
+    background-color: var(--main-bg);
+    font-family: "Nunito Sans";
+}
+.container{width:1170px;margin:auto;}
+header {
+  height: 5rem;
+  background-color: var(--header-bg);
+  text-transform: uppercase;
+  .container{
+    padding:1rem 2rem;
+    display:flex;
+    justify-content: space-between;
+  }
+}
+.loading{
+  width:100px;
+  margin: {
+    left:48%;
+    top:100px
+  }
+}
+.mealsList{
+  margin: {
+    top:60px;
+    bottom:60px;
+  }
+  .container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:60px 20px;
+    .mealPre{
+      padding:1rem 2rem;
+      background-color: var(--card-bg);
+      border-radius:$radius;
+      img{
+        width:300px;
+        border-radius:$radius;
+      }
+      p{
+        margin-bottom: 20px;
+      }
+      a{
+        @extend %link;
+        padding:0.5rem 1rem;
+      }
+    }
+  }
+}
+.meal{
+  margin: 60px 0;
+  .container{
+    display: flex;
+    justify-content: space-between;
+    img{
+      width:45%;
+      border-radius: $radius;
+    }
+    .mealDetails{
+      width:50%;
+    }
+    .instructions{
+      margin-bottom: 50px;
+      p{line-height: 1.5}
+    }
+    a{
+      @extend %link;
+      padding: 1rem;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//Loader
+
+$primary-color: #fff !default;
+$ball-size: 15px !default;
+$margin: 2px !default;
+$line-height: 35px !default;
+$line-width: 4px !default;
+@mixin global-bg() {
+    background-color: $primary-color;
+  }
+  
+  @mixin global-animation() {
+    animation-fill-mode: both;
+  }
+  
+  @mixin balls() {
+    @include global-bg();
+  
+    width: $ball-size;
+    height: $ball-size;
+    border-radius: 100%;
+    margin: $margin;
+  }
+  
+  @keyframes ball-grid-pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.5);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @mixin ball-grid-pulse($n:9) {
+    @for $i from 1 through $n {
+      > div:nth-child(#{$i}) {
+        animation-delay: ((random(100) / 100) - 0.2) + s;
+        animation-duration: ((random(100) / 100) + 0.6) + s;
+      }
+    }
+  
+  }
+  
+  .ball-grid-pulse {
+    @include ball-grid-pulse();
+    width: ($ball-size * 3) + $margin * 6;
+  
+    > div {
+      @include balls();
+      @include global-animation();
+      display: inline-block;
+      float: left;
+      animation-name: ball-grid-pulse;
+      animation-iteration-count: infinite;
+      animation-delay: 0;
+    }
+  }
